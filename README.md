@@ -1,0 +1,2 @@
+# equimago-fortune-teller
+uranai
