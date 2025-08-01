@@ -18,7 +18,7 @@
             /* 背景色を濃いパステルグラデーションに変更 */
             background: linear-gradient(135deg, #a75ff7 0%, #ff83b3 100%);
             color: #4a5568;
-            overflow: hidden; /* 星空のためスクロールを無効に */
+            /* 修正：スクロールを可能にするため、overflow: hiddenを削除 */
         }
 
         /* カスタムスタイル */
@@ -90,6 +90,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            /* 修正：bodyからoverflow:hiddenを削除したため、星空コンテナにhiddenを設定して星がはみ出さないように調整 */
             overflow: hidden;
             z-index: -1;
         }
@@ -169,7 +170,8 @@
 
     <div class="stars" id="stars-container"></div>
 
-    <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+    <!-- 修正: min-h-dvhを使用し、縦方向のコンテンツが画面より長い場合はスクロールを許可 -->
+    <div id="app" class="min-h-dvh flex flex-col items-center justify-center p-4 sm:p-6">
 
         <!-- トップ画面 -->
         <section id="start-screen" class="screen w-full max-w-md text-center">
