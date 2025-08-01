@@ -1,367 +1,451 @@
- <!DOCTYPE html>
- <html lang="ja">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>運命のカード占い｜あなたの髪色タロット</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
-     <style>
-         /* 基本のフォント設定 */
-         body {
-             font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
-             -webkit-font-smoothing: antialiased;
-             -moz-osx-font-smoothing: grayscale;
-         }
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運命のカード占い｜あなたの髪色タロット</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- タイトル用フォント（シンプルで視認性の高い「Noto Sans JP」）と、サブタイトル用フォント（可愛らしい「Kiwi Maru」）を追加 -->
+    <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* 基本のフォント設定 */
+        body {
+            font-family: 'Kiwi Maru', serif; /* 基本フォントをサブタイトルに合わせたものに */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            /* 背景色を濃いパステルグラデーションに変更 */
+            background: linear-gradient(135deg, #a75ff7 0%, #ff83b3 100%);
+            color: #4a5568;
+            overflow: hidden; /* 星空のためスクロールを無効に */
+        }
 
-         /* カスタムスタイル */
-         .bg-gradient-tarot {
-             background: linear-gradient(160deg, #4a0e6c 0%, #8a2be2 50%, #d8bfd8 100%);
-         }
+        /* カスタムスタイル */
+        .card {
+            background-color: #fff; /* カードの背景を不透明な白に */
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.1), 0 2px 10px -2px rgba(0, 0, 0, 0.08);
+            border-radius: 2rem;
+        }
 
-         .card {
-             background-color: rgba(255, 255, 255, 0.8);
-             backdrop-filter: blur(12px);
-             -webkit-backdrop-filter: blur(12px);
-             border: 1px solid rgba(255, 255, 255, 0.4);
-         }
+        .btn-primary {
+            /* グラデーションの背景を二重に設定し、borderに適用するテクニック */
+            background: linear-gradient(135deg, #ffc0cb, #9370db) padding-box,
+                        linear-gradient(135deg, #a75ff7, #ff83b3) border-box;
+            border: 2px solid transparent;
+            /* borderのグラデーションをボタンの形に合わせるための設定 */
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(147, 112, 219, 0.4);
+            border-radius: 9999px; /* さらに角を丸く */
+        }
 
-         .btn-primary {
-             background: linear-gradient(135deg, #c084fc, #8b5cf6);
-             transition: all 0.3s ease;
-             box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-         }
-         .btn-primary:hover {
-             transform: translateY(-2px);
-             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
-         }
+        /* ホバー時のスタイルを調整 */
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(147, 112, 219, 0.6);
+            /* ホバー時にグラデーションの色を濃くする */
+            background: linear-gradient(135deg, #e5a4b4, #7c5ea5) padding-box,
+                        linear-gradient(135deg, #8a4dcb, #e56b8e) border-box;
+        }
 
-         .btn-secondary {
-             background-color: rgba(255, 255, 255, 0.8);
-             color: #6d28d9;
-             transition: all 0.3s ease;
-             border: 1px solid #c4b5fd;
-         }
-         .btn-secondary:hover {
-             background-color: #fff;
-             transform: scale(1.03);
-         }
+        .btn-secondary {
+            background-color: #fff;
+            color: #9370db;
+            transition: all 0.3s ease;
+            border: 2px solid #e0b0ff; /* 優しいパープルの境界線 */
+            border-radius: 9999px; /* さらに角を丸く */
+        }
+        .btn-secondary:hover {
+            background-color: #f8f0ff;
+            transform: scale(1.03);
+        }
 
-         .btn-hotpepper {
-             background-color: #ff4500;
-         }
+        .btn-hotpepper {
+            background-color: #ff6347; /* ホットペッパーカラー */
+        }
 
-         .btn-tel {
-             background-color: #34d399;
-         }
+        .btn-tel {
+            background-color: #3cb371; /* 電話カラー */
+        }
 
-         /* 画面遷移のアニメーション */
-         .screen {
-             animation: fadeIn 0.7s ease-in-out;
-         }
+        /* 画面遷移のアニメーション */
+        .screen {
+            animation: fadeIn 0.7s ease-in-out;
+        }
 
-         @keyframes fadeIn {
-             from { opacity: 0; transform: translateY(10px); }
-             to { opacity: 1; transform: translateY(0); }
-         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-         /* 星の背景 */
-         .stars {
-             position: absolute;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             overflow: hidden;
-             pointer-events: none;
-         }
-         .star {
-             position: absolute;
-             background: white;
-             border-radius: 50%;
-             animation: twinkle linear infinite;
-         }
-         @keyframes twinkle {
-             0%, 100% { opacity: 0.3; }
-             50% { opacity: 0.9; }
-         }
-         /* メニュー名の補足情報を装飾するためのスタイル */
-         .supplement-text {
-             color: #6d28d9; /* パープル系 */
-             font-size: 0.875rem; /* text-sm と同等 */
-             margin-top: 0.25rem;
-             display: inline-block;
-         }
-     </style>
- </head>
- <body class="bg-gradient-tarot text-gray-800">
+        /* 星空の背景を追加 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
 
-     <div class="stars" id="stars-container"></div>
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle linear infinite;
+        }
 
-     <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
+        /* 瞬きアニメーションをより分かりやすく調整 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        /* ロゴのカスタムスタイル */
+        .equimago-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+        }
+        .equimago-logo-container .logo-text {
+            /* テキストの色をホットピンクに変更 */
+            color: #ff69b4;
+            text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
+            font-size: 2.5rem; /* テキストサイズを大きく */
+        }
+        .equimago-logo-container .logo-star {
+            /* ロゴの星の色を鮮やかな金色に戻す */
+            fill: #FFD700;
+            /* 星のサイズを大きく変更 */
+            width: 48px;
+            height: 48px;
+            margin-right: 1rem;
+            animation: rotate 10s linear infinite; /* 星をゆっくり回転させるアニメーション */
+        }
 
-         <section id="start-screen" class="screen w-full max-w-md text-center">
-             <div class="card p-8 rounded-3xl shadow-lg">
-                 <img src="https://googleusercontent.com/file_content/19"
-                      alt="equimago ロゴ"
-                      class="mx-auto mb-6 h-32 object-contain">
-                 <h1 class="text-2xl md:text-3xl font-bold text-purple-700 mb-2" style="font-family: 'M PLUS Rounded 1c', sans-serif;">運命のカード占い</h1>
-                 <h2 class="text-xl md:text-2xl font-medium text-purple-600 mb-8">あなただけの髪色タロット</h2>
-                 <p class="mb-10 text-gray-600">直感で4つの質問に答えて<br>運命のカードが示す髪色を見つけよう</p>
-                 <button id="start-btn" class="btn-primary text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg w-full">
-                     占いをはじめる
-                 </button>
-             </div>
-         </section>
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* タイトル・サブタイトルのスタイルを強調 */
+        .main-title {
+            font-family: 'Noto Sans JP', sans-serif; /* タイトルを「Noto Sans JP」に */
+            font-size: 2.5rem; /* タイトルを大きく */
+            font-weight: 700; /* 太字に設定 */
+            /* グラデーションの色をより濃く、鮮やかに変更 */
+            background-image: linear-gradient(to right, #9d4edd, #ff456e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+        }
 
-         <section id="question-screen" class="screen w-full max-w-md hidden">
-             <div class="card p-6 sm:p-8 rounded-3xl shadow-lg">
-                 <div id="question-container">
-                     </div>
-                 <div class="mt-4 text-center text-sm text-gray-500">
-                     <span id="question-counter"></span> / 4
-                 </div>
-             </div>
-         </section>
+        .sub-title {
+            font-family: 'Kiwi Maru', serif; /* サブタイトルを「Kiwi Maru」に */
+            font-size: 1.5rem; /* サブタイトルを少し大きく */
+            font-weight: 500; /* フォントに合わせて太さを調整 */
+            color: #ff456e; /* 濃いピンクに */
+        }
 
-         <section id="result-screen" class="screen w-full max-w-md hidden">
-             <div class="card p-6 sm:p-8 rounded-3xl shadow-lg text-center">
-                 <p class="text-purple-600 font-medium">あなたが引き当てた運命のカードは...</p>
-                 <h2 id="result-type-name" class="text-3xl font-bold my-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500" style="font-family: 'M PLUS Rounded 1c', sans-serif;"></h2>
-                 <div id="result-image" class="w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner bg-white">
-                     </div>
-                 <p class="text-lg font-bold mb-2">あなたは <span id="result-type-title"></span> タイプ！</p>
-                 <p id="result-description" class="text-gray-700 mb-6"></p>
+        .supplement-text {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gradient-tarot text-gray-800">
 
-                 <div class="bg-purple-50 p-4 rounded-xl mb-6 border border-purple-200">
-                     <h3 class="font-bold text-purple-700 mb-2">🌟 カードが示すおすすめメニュー</h3>
-                     <p id="result-menu" class="text-lg font-semibold text-purple-800"></p>
-                 </div>
+    <div class="stars" id="stars-container"></div>
 
-                 <a id="hotpepper-link" href="https://beauty.hotpepper.jp/slnH000753316/" target="_blank" class="block w-full btn-hotpepper text-white font-bold py-3 px-6 rounded-full text-lg mb-4 shadow-md hover:opacity-90 transition-opacity">
-                     ホットペッパーで予約する
-                 </a>
-                 <a id="tel-link" href="#" class="block w-full btn-tel text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:opacity-90 transition-opacity">
-                     </a>
-                 <button id="retry-btn" class="mt-8 text-gray-500 hover:text-purple-600 transition-colors">もう一度占う</button>
-             </div>
-         </section>
+    <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
 
-     </div>
+        <!-- トップ画面 -->
+        <section id="start-screen" class="screen w-full max-w-md text-center">
+            <div class="card p-8 rounded-3xl shadow-lg">
+                <!-- 新しいロゴを挿入 -->
+                <div class="mx-auto mb-4 h-32 w-full flex flex-col justify-center items-center">
+                    <div class="equimago-logo-container">
+                        <!-- シンプルな星とテキストの組み合わせ -->
+                        <svg class="logo-star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2l2.5 5.5 6.5.5-5 4.5 1.5 6.5-5-3-5 3 1.5-6.5-5-4.5 6.5-.5z"/>
+                        </svg>
+                        <span class="logo-text">equimago</span>
+                    </div>
+                </div>
+                <!-- 既存のh1とh2を調整 -->
+                <h1 class="main-title text-2xl md:text-3xl font-bold mb-2">運命のカード占い</h1>
+                <h2 class="sub-title text-xl md:text-2xl font-medium mb-8">あなたの髪色タロット</h2>
+                <p class="mb-10 text-gray-600">直感で4つの質問に答えて<br>運命のカードが示す髪色を見つけよう</p>
+                <button id="start-btn" class="btn-primary text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg w-full">
+                    占いをはじめる
+                </button>
+            </div>
+        </section>
 
-     <script>
-         // --- データ定義 ---
-         const quizData = [
-             {
-                 question: "Q1. 今朝のあなたの気分は？",
-                 answers: [
-                     { text: "スッキリ爽快！", type: "sun" },
-                     { text: "ちょっとギリギリ…", type: "priestess" },
-                     { text: "のんびり気まま", type: "empress" },
-                     { text: "なんだか眠たい…", type: "moon" },
-                     { text: "誰かと会うのが楽しみ", type: "lovers" },
-                     { text: "新しいことを始めたい", type: "star" }
-                 ]
-             },
-             {
-                 question: "Q2. 好きなファッションの系統は？",
-                 answers: [
-                     { text: "カジュアル", type: "sun" },
-                     { text: "ガーリー・フェミニン", type: "empress" },
-                     { text: "クール・モード", type: "priestess" },
-                     { text: "ナチュラル・シンプル", type: "moon" },
-                     { text: "きれいめ・コンサバ", type: "lovers" },
-                     { text: "個性的・ドリーミー", type: "star" }
-                 ]
-             },
-             {
-                 question: "Q3. 今、気になるワードは？",
-                 answers: [
-                     { text: "癒し・透明感", type: "moon" },
-                     { text: "ツヤ感・大人っぽさ", type: "priestess" },
-                     { text: "華やか・強さ", type: "empress" },
-                     { text: "色素薄い系・抜け感", type: "sun" },
-                     { text: "好感度・愛され", type: "lovers" },
-                     { text: "きらめき・憧れ", type: "star" }
-                 ]
-             },
-             {
-                 question: "Q4. 理想の髪に求めるものは？",
-                 answers: [
-                     { text: "ダメージケア", type: "moon" },
-                     { text: "うるおう透明感", type: "priestess" },
-                     { text: "するんとまとまり", type: "empress" },
-                     { text: "キレイな色持ち", type: "sun" },
-                     { text: "万人ウケする可愛さ", type: "lovers" },
-                     { text: "誰もしてない特別感", type: "star" }
-                 ]
-             }
-         ];
+        <!-- 診断画面 -->
+        <section id="question-screen" class="screen w-full max-w-md hidden">
+            <div class="card p-6 sm:p-8 rounded-3xl shadow-lg">
+                <div id="question-container">
+                    <!-- JSで質問をここに挿入 -->
+                </div>
+                <div class="mt-4 text-center text-sm text-gray-500">
+                    <span id="question-counter"></span> / 4
+                </div>
+            </div>
+        </section>
 
-         const resultsData = {
-             sun: {
-                 name: "THE SUN (太陽)",
-                 title: "生命力と喜びの",
-                 description: "太陽のカードは、生命力と喜びに満ちたエネルギーの証。明るく健康的な魅力を引き出しましょう。",
-                 menu: "色素薄め系 × 濃縮トリートメント<br><span class='supplement-text'>【髪質改善】トリートメント（高濃度）＋ファッションカラー</span>",
-                 color: "bg-yellow-200",
-                 icon: "☀️"
-             },
-             moon: {
-                 name: "THE MOON (月)",
-                 title: "癒しと直感の",
-                 description: "月のカードは、あなたの繊細な感受性と内なる声を示します。周りを優しく癒す力を持つあなたに。",
-                 menu: "透明感カラー＋髪質改善<br><span class='supplement-text'>（メテオカラー）</span>",
-                 color: "bg-blue-200",
-                 icon: "🌙"
-             },
-             empress: {
-                 name: "THE EMPRESS (女帝)",
-                 title: "豊かさと愛情の",
-                 description: "女帝のカードは、愛情と豊かさの象徴。華やかで女性らしい魅力を開花させたいあなたにぴったり。",
-                 menu: "ピンクベージュ系カラー＋保湿<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
-                 color: "bg-pink-200",
-                 icon: "👑"
-             },
-             priestess: {
-                 name: "THE HIGH PRIESTESS (女教皇)",
-                 title: "知性と神秘の",
-                 description: "女教皇のカードは、あなたの知性と神秘的な魅力を象徴します。凛とした大人のツヤを求めるあなたへ。",
-                 menu: "ツヤ感重視カラー＋水分補給<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
-                 color: "bg-indigo-200",
-                 icon: "✨"
-             },
-             lovers: {
-                 name: "THE LOVERS (恋人たち)",
-                 title: "魅力と調和の",
-                 description: "恋人たちのカードは、あなたの持つ魅力と人との調和を象徴します。誰からも愛されるスタイルが、あなたの輝きを増します。",
-                 menu: "愛されブラウン系カラー＋トリートメント<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
-                 color: "bg-rose-200",
-                 icon: "💖"
-             },
-             star: {
-                 name: "THE STAR (星)",
-                 title: "希望と閃きの",
-                 description: "星のカードは、希望と輝くインスピレーションの証。夜空に輝く星のような、きらめきと憧れを髪に宿して。",
-                 menu: "ハイトーンカラー＋ツヤ出し<br><span class='supplement-text'>（メテオカラー）</span>",
-                 color: "bg-sky-200",
-                 icon: "🌟"
-             }
-         };
+        <!-- 結果ページ -->
+        <section id="result-screen" class="screen w-full max-w-md hidden">
+            <div class="card p-6 sm:p-8 rounded-3xl shadow-lg text-center">
+                <p class="text-purple-600 font-medium">あなたが引き当てた運命のカードは...</p>
+                <h2 id="result-type-name" class="text-3xl font-bold my-3 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500"></h2>
+                <div id="result-image" class="w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner bg-white">
+                    <!-- JSでアイコンを挿入 -->
+                </div>
+                <p class="text-lg font-bold mb-2">あなたは <span id="result-type-title"></span> タイプ！</p>
+                <p id="result-description" class="text-gray-700 mb-6"></p>
 
-         // 電話番号データ（bot対策のため動的に生成）
-         const telNumber = "076-411-6852";
+                <div class="bg-pink-50 p-4 rounded-xl mb-6 border border-pink-200">
+                    <h3 class="font-bold text-pink-700 mb-2">🌟 カードが示すおすすめメニュー</h3>
+                    <p id="result-menu" class="text-lg font-semibold text-pink-800"></p>
+                </div>
 
-         // --- DOM要素 ---
-         const startScreen = document.getElementById('start-screen');
-         const questionScreen = document.getElementById('question-screen');
-         const resultScreen = document.getElementById('result-screen');
+                <a id="hotpepper-link" href="https://beauty.hotpepper.jp/slnH000753316/" target="_blank" class="block w-full btn-hotpepper text-white font-bold py-3 px-6 rounded-full text-lg mb-4 shadow-md hover:opacity-90 transition-opacity">
+                    ホットペッパーで予約する
+                </a>
+                <a id="tel-link" href="#" class="block w-full btn-tel text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:opacity-90 transition-opacity">
+                    電話で問い合わせる
+                </a>
+                <button id="retry-btn" class="mt-8 text-gray-500 hover:text-pink-600 transition-colors">もう一度占う</button>
+            </div>
+        </section>
 
-         const startBtn = document.getElementById('start-btn');
-         const retryBtn = document.getElementById('retry-btn');
-         const questionContainer = document.getElementById('question-container');
-         const questionCounter = document.getElementById('question-counter');
-         const telLink = document.getElementById('tel-link');
+    </div>
 
-         // --- 状態管理 ---
-         let currentQuestionIndex = 0;
-         let userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
+    <script>
+        // --- データ定義 ---
+        const quizData = [
+            {
+                question: "Q1. 今朝のあなたの気分は？",
+                answers: [
+                    { text: "スッキリ爽快！", type: "sun" },
+                    { text: "ちょっとギリギリ…", type: "priestess" },
+                    { text: "のんびり気まま", type: "empress" },
+                    { text: "なんだか眠たい…", type: "moon" },
+                    { text: "誰かと会うのが楽しみ", type: "lovers" },
+                    { text: "新しいことを始めたい", type: "star" }
+                ]
+            },
+            {
+                question: "Q2. 好きなファッションの系統は？",
+                answers: [
+                    { text: "カジュアル", type: "sun" },
+                    { text: "ガーリー・フェミニン", type: "empress" },
+                    { text: "クール・モード", type: "priestess" },
+                    { text: "ナチュラル・シンプル", type: "moon" },
+                    { text: "きれいめ・コンサバ", type: "lovers" },
+                    { text: "個性的・ドリーミー", type: "star" }
+                ]
+            },
+            {
+                question: "Q3. 今、気になるワードは？",
+                answers: [
+                    { text: "癒し・透明感", type: "moon" },
+                    { text: "ツヤ感・大人っぽさ", type: "priestess" },
+                    { text: "華やか・強さ", type: "empress" },
+                    { text: "色素薄い系・抜け感", type: "sun" },
+                    { text: "好感度・愛され", type: "lovers" },
+                    { text: "きらめき・憧れ", type: "star" }
+                ]
+            },
+            {
+                question: "Q4. 理想の髪に求めるものは？",
+                answers: [
+                    { text: "ダメージケア", type: "moon" },
+                    { text: "うるおう透明感", type: "priestess" },
+                    { text: "するんとまとまり", type: "empress" },
+                    { text: "キレイな色持ち", type: "sun" },
+                    { text: "万人ウケする可愛さ", type: "lovers" },
+                    { text: "誰もしてない特別感", type: "star" }
+                ]
+            }
+        ];
 
-         // --- 関数 ---
-         function showScreen(screen) {
-             startScreen.classList.add('hidden');
-             questionScreen.classList.add('hidden');
-             resultScreen.classList.add('hidden');
-             screen.classList.remove('hidden');
-         }
+        const resultsData = {
+            sun: {
+                name: "THE SUN (太陽)",
+                title: "生命力と喜びの",
+                description: "太陽のカードは、生命力と喜びに満ちたエネルギーの証。明るく健康的な魅力を引き出しましょう。",
+                menu: "色素薄め系 × 濃縮トリートメント<br><span class='supplement-text'>【髪質改善】トリートメント（高濃度）＋ファッションカラー</span>",
+                color: "bg-yellow-100",
+                icon: "☀️"
+            },
+            moon: {
+                name: "THE MOON (月)",
+                title: "癒しと直感の",
+                description: "月のカードは、あなたの繊細な感受性と内なる声を示します。周りを優しく癒す力を持つあなたに。",
+                menu: "透明感カラー＋髪質改善<br><span class='supplement-text'>（メテオカラー）</span>",
+                color: "bg-blue-100",
+                icon: "🌙"
+            },
+            empress: {
+                name: "THE EMPRESS (女帝)",
+                title: "豊かさと愛情の",
+                description: "女帝のカードは、愛情と豊かさの象徴。華やかで女性らしい魅力を開花させたいあなたにぴったり。",
+                menu: "ピンクベージュ系カラー＋保湿<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                color: "bg-pink-100",
+                icon: "👑"
+            },
+            priestess: {
+                name: "THE HIGH PRIESTESS (女教皇)",
+                title: "知性と神秘の",
+                description: "女教皇のカードは、あなたの知性と神秘的な魅力を象徴します。凛とした大人のツヤを求めるあなたへ。",
+                menu: "ツヤ感重視カラー＋水分補給<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                color: "bg-indigo-100",
+                icon: "✨"
+            },
+            lovers: {
+                name: "THE LOVERS (恋人たち)",
+                title: "魅力と調和の",
+                description: "恋人たちのカードは、あなたの持つ魅力と人との調和を象徴します。誰からも愛されるスタイルが、あなたの輝きを増します。",
+                menu: "愛されブラウン系カラー＋トリートメント<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                color: "bg-rose-100",
+                icon: "💖"
+            },
+            star: {
+                name: "THE STAR (星)",
+                title: "希望と閃きの",
+                description: "星のカードは、希望と輝くインスピレーションの証。夜空に輝く星のような、きらめきと憧れを髪に宿して。",
+                menu: "ハイトーンカラー＋ツヤ出し<br><span class='supplement-text'>（メテオカラー）</span>",
+                color: "bg-sky-100",
+                icon: "🌟"
+            }
+        };
 
-         function startQuiz() {
-             currentQuestionIndex = 0;
-             userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
-             showQuestion();
-             showScreen(questionScreen);
-         }
+        // 電話番号データ（bot対策のため動的に生成）
+        const telNumber = "076-411-6852";
 
-         function showQuestion() {
-             const questionData = quizData [currentQuestionIndex];
-             questionCounter.textContent = currentQuestionIndex + 1;
+        // --- DOM要素 ---
+        const startScreen = document.getElementById('start-screen');
+        const questionScreen = document.getElementById('question-screen');
+        const resultScreen = document.getElementById('result-screen');
 
-             let answersHtml = questionData.answers.map(answer =>
-                 `<button class="btn-secondary font-semibold py-3 px-5 rounded-full w-full mb-3 text-left text-sm" onclick="selectAnswer('${answer.type}')">
-                     ${answer.text}
-                 </button>`
-             ).join('');
+        const startBtn = document.getElementById('start-btn');
+        const retryBtn = document.getElementById('retry-btn');
+        const questionContainer = document.getElementById('question-container');
+        const questionCounter = document.getElementById('question-counter');
+        const telLink = document.getElementById('tel-link');
 
-             questionContainer.innerHTML = `
-                 <h3 class="text-xl font-bold text-center mb-6">${questionData.question}</h3>
-                 <div class="flex flex-col">
-                     ${answersHtml}
-                 </div>
-             `;
-         }
+        // --- 状態管理 ---
+        let currentQuestionIndex = 0;
+        let userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
 
-         window.selectAnswer = function(type) {
-             userChoices [type]++;
-             currentQuestionIndex++;
+        // --- 関数 ---
+        function showScreen(screen) {
+            startScreen.classList.add('hidden');
+            questionScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            screen.classList.remove('hidden');
+        }
 
-             if (currentQuestionIndex < quizData.length) {
-                 showQuestion();
-             } else {
-                 showResult();
-             }
-         }
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
+            showQuestion();
+            showScreen(questionScreen);
+        }
 
-         function showResult() {
-             // 最も多く選ばれたタイプを決定
-             let finalType = Object.keys(userChoices).reduce((a, b) => userChoices [a] > userChoices [b] ? a : b);
-             const result = resultsData [finalType];
+        function showQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            questionCounter.textContent = currentQuestionIndex + 1;
 
-             // 結果をDOMに反映
-             document.getElementById('result-type-name').textContent = result.name;
-             document.getElementById('result-type-title').textContent = result.title;
-             document.getElementById('result-description').textContent = result.description;
-             document.getElementById('result-menu').innerHTML = result.menu;
+            let answersHtml = questionData.answers.map(answer =>
+                `<button class="btn-secondary font-semibold py-3 px-5 rounded-full w-full mb-3 text-left text-sm" onclick="selectAnswer('${answer.type}')">
+                    ${answer.text}
+                </button>`
+            ).join('');
 
-             const resultImage = document.getElementById('result-image');
-             resultImage.innerHTML = `<span class="text-6xl">${result.icon}</span>`;
-             resultImage.className = `w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner ${result.color}`;
+            questionContainer.innerHTML = `
+                <h3 class="text-xl font-bold text-center mb-6">${questionData.question}</h3>
+                <div class="flex flex-col">
+                    ${answersHtml}
+                </div>
+            `;
+        }
+
+        window.selectAnswer = function(type) {
+            userChoices[type]++;
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            // 最も多く選ばれたタイプを決定
+            let finalType = Object.keys(userChoices).reduce((a, b) => userChoices[a] > userChoices[b] ? a : b);
+            const result = resultsData[finalType];
+
+            // 結果をDOMに反映
+            document.getElementById('result-type-name').textContent = result.name;
+            document.getElementById('result-type-title').textContent = result.title;
+            document.getElementById('result-description').textContent = result.description;
+            document.getElementById('result-menu').innerHTML = result.menu;
+
+            const resultImage = document.getElementById('result-image');
+            resultImage.innerHTML = `<span class="text-6xl">${result.icon}</span>`;
+            resultImage.className = `w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner ${result.color}`;
 
 
-             showScreen(resultScreen);
-         }
+            showScreen(resultScreen);
+        }
 
-         // --- 星空の生成 ---
-         function createStars() {
-             const container = document.getElementById('stars-container');
-             const starCount = 100;
-             for (let i = 0; i < starCount; i++) {
-                 const star = document.createElement('div');
-                 star.className = 'star';
-                 const size = Math.random() * 2.5;
-                 star.style.width = `${size}px`;
-                 star.style.height = `${size}px`;
-                 star.style.top = `${Math.random() * 100}%`;
-                 star.style.left = `${Math.random() * 100}%`;
-                 star.style.animationDuration = `${Math.random() * 4 + 3}s`;
-                 star.style.animationDelay = `${Math.random() * 4}s`;
-                 container.appendChild(star);
-             }
-         }
+        // --- 星空の生成 ---
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            // 星の数を増やして密度を上げる
+            const starCount = 200; 
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                // 星の大きさをランダムに生成
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                // アニメーションの速度をランダムに
+                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                container.appendChild(star);
+            }
+        }
 
-         // --- イベントリスナー ---
-         startBtn.addEventListener('click', startQuiz);
-         retryBtn.addEventListener('click', () => showScreen(startScreen));
+        // --- イベントリスナー ---
+        startBtn.addEventListener('click', startQuiz);
+        retryBtn.addEventListener('click', () => showScreen(startScreen));
 
-         // --- 初期化 ---
-         window.onload = () => {
-             createStars();
-             // 電話番号のリンクとテキストを動的に設定
-             telLink.href = `tel:${telNumber}`;
-             telLink.innerHTML = `電話で問い合わせる (${telNumber})`;
-         };
-     </script>
- </body>
- </html>
- 
+        // --- 初期化 ---
+        window.onload = () => {
+            createStars();
+            // 電話番号のリンクを設定
+            telLink.href = `tel:${telNumber}`;
+        };
+    </script>
+</body>
+</html>
