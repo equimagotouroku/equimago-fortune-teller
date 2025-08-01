@@ -1,392 +1,367 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>星からの贈り物｜あなたの運命カラー占い</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        /* 基本のフォント設定 */
-        body {
-            font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+ <!DOCTYPE html>
+ <html lang="ja">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>運命のカード占い｜あなたの髪色タロット</title>
+     <script src="https://cdn.tailwindcss.com"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Kiwi+Maru:wght@300;400;500&display=swap" rel="stylesheet">
+     <style>
+         /* 基本のフォント設定 */
+         body {
+             font-family: 'Kiwi Maru', 'M PLUS Rounded 1c', sans-serif;
+             -webkit-font-smoothing: antialiased;
+             -moz-osx-font-smoothing: grayscale;
+         }
 
-        /* カスタムスタイル */
-        .bg-gradient-galaxy {
-            background: linear-gradient(160deg, #fde4f2 0%, #e5dcfc 50%, #d8e6ff 100%);
-        }
-        
-        .card {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+         /* カスタムスタイル */
+         .bg-gradient-tarot {
+             background: linear-gradient(160deg, #4a0e6c 0%, #8a2be2 50%, #d8bfd8 100%);
+         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #f7abfa, #a693f8);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(180, 160, 240, 0.4);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(180, 160, 240, 0.6);
-        }
+         .card {
+             background-color: rgba(255, 255, 255, 0.8);
+             backdrop-filter: blur(12px);
+             -webkit-backdrop-filter: blur(12px);
+             border: 1px solid rgba(255, 255, 255, 0.4);
+         }
 
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #8b5cf6;
-            transition: all 0.3s ease;
-            border: 1px solid #d8b4fe;
-        }
-        .btn-secondary:hover {
-            background-color: #fff;
-            transform: scale(1.03);
-        }
-        
-        .btn-hotpepper {
-            background-color: #ff4500;
-        }
-        
-        .btn-tel {
-            background-color: #34d399;
-        }
+         .btn-primary {
+             background: linear-gradient(135deg, #c084fc, #8b5cf6);
+             transition: all 0.3s ease;
+             box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+         }
+         .btn-primary:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+         }
 
-        /* 画面遷移のアニメーション */
-        .screen {
-            animation: fadeIn 0.7s ease-in-out;
-        }
+         .btn-secondary {
+             background-color: rgba(255, 255, 255, 0.8);
+             color: #6d28d9;
+             transition: all 0.3s ease;
+             border: 1px solid #c4b5fd;
+         }
+         .btn-secondary:hover {
+             background-color: #fff;
+             transform: scale(1.03);
+         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+         .btn-hotpepper {
+             background-color: #ff4500;
+         }
 
-        /* 星の背景 */
-        .stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle linear infinite;
-        }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
+         .btn-tel {
+             background-color: #34d399;
+         }
 
-        /* ロゴのスタイル */
-        .logo-container {
-            width: 100%;
-            max-width: 300px; /* ロゴの最大幅 */
-            height: 96px; /* h-24 (96px) に合わせる */
-            margin: 0 auto 1.5rem; /* mx-auto mb-6 に合わせる */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+         /* 画面遷移のアニメーション */
+         .screen {
+             animation: fadeIn 0.7s ease-in-out;
+         }
 
-        .logo-svg {
-            width: 100%;
-            height: 100%;
-            max-width: 300px;
-            max-height: 96px;
-        }
+         @keyframes fadeIn {
+             from { opacity: 0; transform: translateY(10px); }
+             to { opacity: 1; transform: translateY(0); }
+         }
 
-        .logo-text-en {
-            font-family: 'M PLUS Rounded 1c', sans-serif;
-            font-weight: 700; /* Bold */
-            fill: #E54D5D; /* 赤っぽい色 */
-        }
+         /* 星の背景 */
+         .stars {
+             position: absolute;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             overflow: hidden;
+             pointer-events: none;
+         }
+         .star {
+             position: absolute;
+             background: white;
+             border-radius: 50%;
+             animation: twinkle linear infinite;
+         }
+         @keyframes twinkle {
+             0%, 100% { opacity: 0.3; }
+             50% { opacity: 0.9; }
+         }
+         /* メニュー名の補足情報を装飾するためのスタイル */
+         .supplement-text {
+             color: #6d28d9; /* パープル系 */
+             font-size: 0.875rem; /* text-sm と同等 */
+             margin-top: 0.25rem;
+             display: inline-block;
+         }
+     </style>
+ </head>
+ <body class="bg-gradient-tarot text-gray-800">
 
-        .logo-text-jp {
-            font-family: 'Kiwi Maru', sans-serif;
-            font-weight: 500; /* Medium */
-            fill: #E54D5D; /* 赤っぽい色 */
-        }
-    </style>
-</head>
-<body class="bg-gradient-galaxy text-gray-700">
+     <div class="stars" id="stars-container"></div>
 
-    <div class="stars" id="stars-container"></div>
+     <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
 
-    <div id="app" class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6">
-        
-        <!-- トップ画面 -->
-        <section id="start-screen" class="screen w-full max-w-md text-center">
-            <div class="card p-8 rounded-3xl shadow-lg">
-                <!-- ロゴをSVGで表示 -->
-                <div class="logo-container">
-                    <svg class="logo-svg" viewBox="0 0 300 96" preserveAspectRatio="xMidYMid meet">
-                        <!-- 背景の丸みを帯びた長方形 -->
-                        <rect x="0" y="0" width="300" height="96" rx="15" ry="15" fill="#FFFFFF" opacity="0.9" />
+         <section id="start-screen" class="screen w-full max-w-md text-center">
+             <div class="card p-8 rounded-3xl shadow-lg">
+                 <img src="https://googleusercontent.com/file_content/19"
+                      alt="equimago ロゴ"
+                      class="mx-auto mb-6 h-32 object-contain">
+                 <h1 class="text-2xl md:text-3xl font-bold text-purple-700 mb-2" style="font-family: 'M PLUS Rounded 1c', sans-serif;">運命のカード占い</h1>
+                 <h2 class="text-xl md:text-2xl font-medium text-purple-600 mb-8">あなただけの髪色タロット</h2>
+                 <p class="mb-10 text-gray-600">直感で4つの質問に答えて<br>運命のカードが示す髪色を見つけよう</p>
+                 <button id="start-btn" class="btn-primary text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg w-full">
+                     占いをはじめる
+                 </button>
+             </div>
+         </section>
 
-                        <!-- テキスト -->
-                        <text x="50%" y="40%" dominant-baseline="middle" text-anchor="middle" font-size="40" class="logo-text-en">equimago</text>
-                        <text x="50%" y="80%" dominant-baseline="middle" text-anchor="middle" font-size="28" class="logo-text-jp">エキマーゴ</text>
+         <section id="question-screen" class="screen w-full max-w-md hidden">
+             <div class="card p-6 sm:p-8 rounded-3xl shadow-lg">
+                 <div id="question-container">
+                     </div>
+                 <div class="mt-4 text-center text-sm text-gray-500">
+                     <span id="question-counter"></span> / 4
+                 </div>
+             </div>
+         </section>
 
-                        <!-- 小さな星のアイコン (例: equimagoの'o'の近く) -->
-                        <polygon points="200,35 202,40 207,40 203,43 204,48 200,45 196,48 197,43 193,40 198,40" fill="#FFD700" />
+         <section id="result-screen" class="screen w-full max-w-md hidden">
+             <div class="card p-6 sm:p-8 rounded-3xl shadow-lg text-center">
+                 <p class="text-purple-600 font-medium">あなたが引き当てた運命のカードは...</p>
+                 <h2 id="result-type-name" class="text-3xl font-bold my-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-indigo-500" style="font-family: 'M PLUS Rounded 1c', sans-serif;"></h2>
+                 <div id="result-image" class="w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner bg-white">
+                     </div>
+                 <p class="text-lg font-bold mb-2">あなたは <span id="result-type-title"></span> タイプ！</p>
+                 <p id="result-description" class="text-gray-700 mb-6"></p>
 
-                        <!-- かわいい魔法使いのイラスト -->
-                        <!-- 本体 -->
-                        <path d="M100 30 C 95 20, 85 20, 80 30 L 80 50 C 85 60, 95 60, 100 50 Z" fill="#FFC0CB" />
-                        <!-- 帽子 -->
-                        <path d="M85 25 L 90 10 L 105 20 L 100 30 Z" fill="#8A2BE2" />
-                        <!-- 腕 -->
-                        <path d="M82 35 Q 75 40, 78 45" stroke="#FFC0CB" stroke-width="3" fill="none" />
-                        <path d="M98 35 Q 105 40, 102 45" stroke="#FFC0CB" stroke-width="3" fill="none" />
-                        <!-- 目 -->
-                        <circle cx="90" cy="35" r="1.5" fill="#333" />
-                        <circle cx="95" cy="35" r="1.5" fill="#333" />
-                        <!-- 口 -->
-                        <path d="M92.5 40 Q 90 42, 95 42" stroke="#333" stroke-width="1" fill="none" />
-                        <!-- ほうき -->
-                        <line x1="75" y1="48" x2="60" y2="55" stroke="#A0522D" stroke-width="2" />
-                        <circle cx="60" cy="55" r="3" fill="#A0522D" />
-                        <path d="M58 55 Q 55 58, 57 60 Q 60 63, 63 60 Q 65 58, 62 55 Z" fill="#D2B48C" />
-                    </svg>
-                </div>
-                <h1 class="text-2xl md:text-3xl font-bold text-purple-600 mb-2" style="font-family: 'M PLUS Rounded 1c', sans-serif;">星からの贈り物</h1>
-                <h2 class="text-xl md:text-2xl font-medium text-purple-500 mb-8">あなたの運命カラー占い</h2>
-                <p class="mb-10 text-gray-600">4つの簡単な質問に答えて<br>あなただけの特別な髪色を見つけよう</p>
-                <button id="start-btn" class="btn-primary text-white font-bold py-3 px-12 rounded-full text-lg shadow-lg w-full">
-                    診断をはじめる
-                </button>
-            </div>
-        </section>
+                 <div class="bg-purple-50 p-4 rounded-xl mb-6 border border-purple-200">
+                     <h3 class="font-bold text-purple-700 mb-2">🌟 カードが示すおすすめメニュー</h3>
+                     <p id="result-menu" class="text-lg font-semibold text-purple-800"></p>
+                 </div>
 
-        <!-- 診断画面 -->
-        <section id="question-screen" class="screen w-full max-w-md hidden">
-            <div class="card p-6 sm:p-8 rounded-3xl shadow-lg">
-                <div id="question-container">
-                    <!-- JSで質問をここに挿入 -->
-                </div>
-                <div class="mt-4 text-center text-sm text-gray-500">
-                    <span id="question-counter"></span> / 4
-                </div>
-            </div>
-        </section>
+                 <a id="hotpepper-link" href="https://beauty.hotpepper.jp/slnH000753316/" target="_blank" class="block w-full btn-hotpepper text-white font-bold py-3 px-6 rounded-full text-lg mb-4 shadow-md hover:opacity-90 transition-opacity">
+                     ホットペッパーで予約する
+                 </a>
+                 <a id="tel-link" href="#" class="block w-full btn-tel text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:opacity-90 transition-opacity">
+                     </a>
+                 <button id="retry-btn" class="mt-8 text-gray-500 hover:text-purple-600 transition-colors">もう一度占う</button>
+             </div>
+         </section>
 
-        <!-- 結果ページ -->
-        <section id="result-screen" class="screen w-full max-w-md hidden">
-            <div class="card p-6 sm:p-8 rounded-3xl shadow-lg text-center">
-                <p class="text-purple-500 font-medium">あなたの運命カラーは...</p>
-                <h2 id="result-type-name" class="text-3xl font-bold my-3 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500" style="font-family: 'M PLUS Rounded 1c', sans-serif;"></h2>
-                <div id="result-image" class="w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner bg-white">
-                    <!-- JSで画像やアイコンを挿入 -->
-                </div>
-                <p class="text-lg font-bold mb-2">あなたは <span id="result-type-title"></span> タイプ！</p>
-                <p id="result-description" class="text-gray-600 mb-6"></p>
-                
-                <div class="bg-purple-50 p-4 rounded-xl mb-6">
-                    <h3 class="font-bold text-purple-600 mb-2">🌟 おすすめメニュー</h3>
-                    <p id="result-menu" class="text-lg font-semibold"></p>
-                </div>
+     </div>
 
-                <a id="hotpepper-link" href="https://beauty.hotpepper.jp/slnH000753316/" target="_blank" class="block w-full btn-hotpepper text-white font-bold py-3 px-6 rounded-full text-lg mb-4 shadow-md hover:opacity-90 transition-opacity">
-                    ホットペッパーで予約する
-                </a>
-                <button id="retry-btn" class="mt-8 text-gray-500 hover:text-purple-600 transition-colors">もう一度診断する</button>
-            </div>
-        </section>
+     <script>
+         // --- データ定義 ---
+         const quizData = [
+             {
+                 question: "Q1. 今朝のあなたの気分は？",
+                 answers: [
+                     { text: "スッキリ爽快！", type: "sun" },
+                     { text: "ちょっとギリギリ…", type: "priestess" },
+                     { text: "のんびり気まま", type: "empress" },
+                     { text: "なんだか眠たい…", type: "moon" },
+                     { text: "誰かと会うのが楽しみ", type: "lovers" },
+                     { text: "新しいことを始めたい", type: "star" }
+                 ]
+             },
+             {
+                 question: "Q2. 好きなファッションの系統は？",
+                 answers: [
+                     { text: "カジュアル", type: "sun" },
+                     { text: "ガーリー・フェミニン", type: "empress" },
+                     { text: "クール・モード", type: "priestess" },
+                     { text: "ナチュラル・シンプル", type: "moon" },
+                     { text: "きれいめ・コンサバ", type: "lovers" },
+                     { text: "個性的・ドリーミー", type: "star" }
+                 ]
+             },
+             {
+                 question: "Q3. 今、気になるワードは？",
+                 answers: [
+                     { text: "癒し・透明感", type: "moon" },
+                     { text: "ツヤ感・大人っぽさ", type: "priestess" },
+                     { text: "華やか・強さ", type: "empress" },
+                     { text: "色素薄い系・抜け感", type: "sun" },
+                     { text: "好感度・愛され", type: "lovers" },
+                     { text: "きらめき・憧れ", type: "star" }
+                 ]
+             },
+             {
+                 question: "Q4. 理想の髪に求めるものは？",
+                 answers: [
+                     { text: "ダメージケア", type: "moon" },
+                     { text: "うるおう透明感", type: "priestess" },
+                     { text: "するんとまとまり", type: "empress" },
+                     { text: "キレイな色持ち", type: "sun" },
+                     { text: "万人ウケする可愛さ", type: "lovers" },
+                     { text: "誰もしてない特別感", type: "star" }
+                 ]
+             }
+         ];
 
-    </div>
+         const resultsData = {
+             sun: {
+                 name: "THE SUN (太陽)",
+                 title: "生命力と喜びの",
+                 description: "太陽のカードは、生命力と喜びに満ちたエネルギーの証。明るく健康的な魅力を引き出しましょう。",
+                 menu: "色素薄め系 × 濃縮トリートメント<br><span class='supplement-text'>【髪質改善】トリートメント（高濃度）＋ファッションカラー</span>",
+                 color: "bg-yellow-200",
+                 icon: "☀️"
+             },
+             moon: {
+                 name: "THE MOON (月)",
+                 title: "癒しと直感の",
+                 description: "月のカードは、あなたの繊細な感受性と内なる声を示します。周りを優しく癒す力を持つあなたに。",
+                 menu: "透明感カラー＋髪質改善<br><span class='supplement-text'>（メテオカラー）</span>",
+                 color: "bg-blue-200",
+                 icon: "🌙"
+             },
+             empress: {
+                 name: "THE EMPRESS (女帝)",
+                 title: "豊かさと愛情の",
+                 description: "女帝のカードは、愛情と豊かさの象徴。華やかで女性らしい魅力を開花させたいあなたにぴったり。",
+                 menu: "ピンクベージュ系カラー＋保湿<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                 color: "bg-pink-200",
+                 icon: "👑"
+             },
+             priestess: {
+                 name: "THE HIGH PRIESTESS (女教皇)",
+                 title: "知性と神秘の",
+                 description: "女教皇のカードは、あなたの知性と神秘的な魅力を象徴します。凛とした大人のツヤを求めるあなたへ。",
+                 menu: "ツヤ感重視カラー＋水分補給<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                 color: "bg-indigo-200",
+                 icon: "✨"
+             },
+             lovers: {
+                 name: "THE LOVERS (恋人たち)",
+                 title: "魅力と調和の",
+                 description: "恋人たちのカードは、あなたの持つ魅力と人との調和を象徴します。誰からも愛されるスタイルが、あなたの輝きを増します。",
+                 menu: "愛されブラウン系カラー＋トリートメント<br><span class='supplement-text'>（髪質改善カラー＝ベホマラー）</span>",
+                 color: "bg-rose-200",
+                 icon: "💖"
+             },
+             star: {
+                 name: "THE STAR (星)",
+                 title: "希望と閃きの",
+                 description: "星のカードは、希望と輝くインスピレーションの証。夜空に輝く星のような、きらめきと憧れを髪に宿して。",
+                 menu: "ハイトーンカラー＋ツヤ出し<br><span class='supplement-text'>（メテオカラー）</span>",
+                 color: "bg-sky-200",
+                 icon: "🌟"
+             }
+         };
 
-    <script>
-        // --- データ定義 ---
-        const quizData = [
-            {
-                question: "Q1. 今朝のあなたの気分は？",
-                answers: [
-                    { text: "スッキリ爽快！", type: "sunlight" },
-                    { text: "ちょっとギリギリ…", type: "shimmer" },
-                    { text: "のんびり気まま", type: "pure" },
-                    { text: "なんだか眠たい…", type: "moon" }
-                ]
-            },
-            {
-                question: "Q2. 好きなファッションの系統は？",
-                answers: [
-                    { text: "カジュアル", type: "sunlight" },
-                    { text: "ガーリー・フェミニン", type: "pure" },
-                    { text: "クール・モード", type: "shimmer" },
-                    { text: "ナチュラル・シンプル", type: "moon" }
-                ]
-            },
-            {
-                question: "Q3. 今、気になるワードは？",
-                answers: [
-                    { text: "癒し・透明感", type: "moon" },
-                    { text: "ツヤ感・大人っぽさ", type: "shimmer" },
-                    { text: "華やか・強さ", type: "pure" },
-                    { text: "色素薄い系・抜け感", type: "sunlight" }
-                ]
-            },
-            {
-                question: "Q4. 理想の髪に求めるものは？",
-                answers: [
-                    { text: "ダメージケア", type: "moon" },
-                    { text: "うるおう透明感", type: "shimmer" },
-                    { text: "するんとまとまり", type: "pure" },
-                    { text: "キレイな色持ち", type: "sunlight" }
-                ]
-            }
-        ];
+         // 電話番号データ（bot対策のため動的に生成）
+         const telNumber = "076-411-6852";
 
-        const resultsData = {
-            moon: {
-                name: "ムーンブルー",
-                title: "癒しの透明感",
-                description: "穏やかで優しい雰囲気を持つあなた。内面の静かな輝きが、周りの人を癒す力になっています。",
-                menu: "透明感カラー＋髪質改善",
-                color: "bg-blue-200",
-                icon: "🌙"
-            },
-            shimmer: {
-                name: "シマーパープル",
-                title: "神秘的なツヤ感",
-                description: "ちょっぴりミステリアスで大人っぽい魅力の持ち主。洗練されたセンスで、一目置かれる存在です。",
-                menu: "ツヤ感重視カラー",
-                color: "bg-purple-200",
-                icon: "✨"
-            },
-            pure: {
-                name: "ピュアピンク",
-                title: "愛されフェミニン",
-                description: "ふんわりと甘く、華やかなオーラを放つあなた。その可愛らしさで、自然とみんなを笑顔にします。",
-                menu: "ピンクベージュ系カラー＋保湿",
-                color: "bg-pink-200",
-                icon: "🌸"
-            },
-            sunlight: {
-                name: "サンライトベージュ",
-                title: "ヘルシーな抜け感",
-                description: "太陽のように明るく、エネルギッシュなあなた。自然体な魅力で、周りをパッと明るくします。",
-                // ブリーチなしでも「色素薄め系」「抜け感」を表現できるメニューに変更
-                menu: "透明感UPカラー＋トリートメント", 
-                color: "bg-yellow-200",
-                icon: "☀️"
-            }
-        };
+         // --- DOM要素 ---
+         const startScreen = document.getElementById('start-screen');
+         const questionScreen = document.getElementById('question-screen');
+         const resultScreen = document.getElementById('result-screen');
 
-        // --- DOM要素 ---
-        const startScreen = document.getElementById('start-screen');
-        const questionScreen = document.getElementById('question-screen');
-        const resultScreen = document.getElementById('result-screen');
-        
-        const startBtn = document.getElementById('start-btn');
-        const retryBtn = document.getElementById('retry-btn');
-        const questionContainer = document.getElementById('question-container');
-        const questionCounter = document.getElementById('question-counter');
+         const startBtn = document.getElementById('start-btn');
+         const retryBtn = document.getElementById('retry-btn');
+         const questionContainer = document.getElementById('question-container');
+         const questionCounter = document.getElementById('question-counter');
+         const telLink = document.getElementById('tel-link');
 
-        // --- 状態管理 ---
-        let currentQuestionIndex = 0;
-        let userChoices = { moon: 0, shimmer: 0, pure: 0, sunlight: 0 };
+         // --- 状態管理 ---
+         let currentQuestionIndex = 0;
+         let userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
 
-        // --- 関数 ---
-        function showScreen(screen) {
-            startScreen.classList.add('hidden');
-            questionScreen.classList.add('hidden');
-            resultScreen.classList.add('hidden');
-            screen.classList.remove('hidden');
-        }
+         // --- 関数 ---
+         function showScreen(screen) {
+             startScreen.classList.add('hidden');
+             questionScreen.classList.add('hidden');
+             resultScreen.classList.add('hidden');
+             screen.classList.remove('hidden');
+         }
 
-        function startQuiz() {
-            currentQuestionIndex = 0;
-            userChoices = { moon: 0, shimmer: 0, pure: 0, sunlight: 0 };
-            showQuestion();
-            showScreen(questionScreen);
-        }
+         function startQuiz() {
+             currentQuestionIndex = 0;
+             userChoices = { sun: 0, moon: 0, priestess: 0, empress: 0, lovers: 0, star: 0 };
+             showQuestion();
+             showScreen(questionScreen);
+         }
 
-        function showQuestion() {
-            const questionData = quizData[currentQuestionIndex];
-            questionCounter.textContent = currentQuestionIndex + 1;
-            
-            let answersHtml = questionData.answers.map(answer => 
-                `<button class="btn-secondary font-semibold py-3 px-5 rounded-full w-full mb-4 text-left" onclick="selectAnswer('${answer.type}')">
-                    ${answer.text}
-                </button>`
-            ).join('');
+         function showQuestion() {
+             const questionData = quizData [currentQuestionIndex];
+             questionCounter.textContent = currentQuestionIndex + 1;
 
-            questionContainer.innerHTML = `
-                <h3 class="text-xl font-bold text-center mb-6">${questionData.question}</h3>
-                <div class="flex flex-col">
-                    ${answersHtml}
-                </div>
-            `;
-        }
+             let answersHtml = questionData.answers.map(answer =>
+                 `<button class="btn-secondary font-semibold py-3 px-5 rounded-full w-full mb-3 text-left text-sm" onclick="selectAnswer('${answer.type}')">
+                     ${answer.text}
+                 </button>`
+             ).join('');
 
-        window.selectAnswer = function(type) {
-            userChoices[type]++;
-            currentQuestionIndex++;
+             questionContainer.innerHTML = `
+                 <h3 class="text-xl font-bold text-center mb-6">${questionData.question}</h3>
+                 <div class="flex flex-col">
+                     ${answersHtml}
+                 </div>
+             `;
+         }
 
-            if (currentQuestionIndex < quizData.length) {
-                showQuestion();
-            } else {
-                showResult();
-            }
-        }
+         window.selectAnswer = function(type) {
+             userChoices [type]++;
+             currentQuestionIndex++;
 
-        function showResult() {
-            // 最も多く選ばれたタイプを決定
-            let finalType = Object.keys(userChoices).reduce((a, b) => userChoices[a] > userChoices[b] ? a : b);
-            const result = resultsData[finalType];
+             if (currentQuestionIndex < quizData.length) {
+                 showQuestion();
+             } else {
+                 showResult();
+             }
+         }
 
-            // 結果をDOMに反映
-            document.getElementById('result-type-name').textContent = result.name;
-            document.getElementById('result-type-title').textContent = result.title;
-            document.getElementById('result-description').textContent = result.description;
-            document.getElementById('result-menu').textContent = result.menu;
-            
-            const resultImage = document.getElementById('result-image');
-            resultImage.innerHTML = `<span class="text-6xl">${result.icon}</span>`;
-            resultImage.className = `w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner ${result.color}`;
+         function showResult() {
+             // 最も多く選ばれたタイプを決定
+             let finalType = Object.keys(userChoices).reduce((a, b) => userChoices [a] > userChoices [b] ? a : b);
+             const result = resultsData [finalType];
+
+             // 結果をDOMに反映
+             document.getElementById('result-type-name').textContent = result.name;
+             document.getElementById('result-type-title').textContent = result.title;
+             document.getElementById('result-description').textContent = result.description;
+             document.getElementById('result-menu').innerHTML = result.menu;
+
+             const resultImage = document.getElementById('result-image');
+             resultImage.innerHTML = `<span class="text-6xl">${result.icon}</span>`;
+             resultImage.className = `w-40 h-40 rounded-full mx-auto my-6 flex items-center justify-center shadow-inner ${result.color}`;
 
 
-            showScreen(resultScreen);
-        }
-        
-        // --- 星空の生成 ---
-        function createStars() {
-            const container = document.getElementById('stars-container');
-            const starCount = 100;
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 3;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                star.style.animationDelay = `${Math.random() * 3}s`;
-                container.appendChild(star);
-            }
-        }
+             showScreen(resultScreen);
+         }
 
-        // --- イベントリスナー ---
-        startBtn.addEventListener('click', startQuiz);
-        retryBtn.addEventListener('click', () => showScreen(startScreen));
-        
-        // --- 初期化 ---
-        window.onload = () => {
-            createStars();
-        };
+         // --- 星空の生成 ---
+         function createStars() {
+             const container = document.getElementById('stars-container');
+             const starCount = 100;
+             for (let i = 0; i < starCount; i++) {
+                 const star = document.createElement('div');
+                 star.className = 'star';
+                 const size = Math.random() * 2.5;
+                 star.style.width = `${size}px`;
+                 star.style.height = `${size}px`;
+                 star.style.top = `${Math.random() * 100}%`;
+                 star.style.left = `${Math.random() * 100}%`;
+                 star.style.animationDuration = `${Math.random() * 4 + 3}s`;
+                 star.style.animationDelay = `${Math.random() * 4}s`;
+                 container.appendChild(star);
+             }
+         }
 
-    </script>
-</body>
-</html>
+         // --- イベントリスナー ---
+         startBtn.addEventListener('click', startQuiz);
+         retryBtn.addEventListener('click', () => showScreen(startScreen));
+
+         // --- 初期化 ---
+         window.onload = () => {
+             createStars();
+             // 電話番号のリンクとテキストを動的に設定
+             telLink.href = `tel:${telNumber}`;
+             telLink.innerHTML = `電話で問い合わせる (${telNumber})`;
+         };
+     </script>
+ </body>
+ </html>
+ 
